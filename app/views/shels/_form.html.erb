@@ -1,0 +1,27 @@
+<%= form_with(model: shel, local: true) do |form| %>
+  <% if shel.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(shel.errors.count, "error") %> prohibited this shel from being saved:</h2>
+
+      <ul>
+      <% shel.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :shel_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :row %>
+    <%= form.number_field :row, id: :shel_row %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

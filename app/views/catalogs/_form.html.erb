@@ -1,0 +1,37 @@
+<%= form_with(model: catalog, local: true) do |form| %>
+  <% if catalog.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(catalog.errors.count, "error") %> prohibited this catalog from being saved:</h2>
+
+      <ul>
+      <% catalog.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :folder %>
+    <%= form.number_field :folder, id: :catalog_folder %>
+  </div>
+
+  <div class="field">
+    <%= form.label :type %>
+    <%= form.text_field :type, id: :catalog_type %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :catalog_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :characteristic %>
+    <%= form.text_field :characteristic, id: :catalog_characteristic %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

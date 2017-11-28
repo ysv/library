@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @shel.name %>
+</p>
+
+<p>
+  <strong>Row:</strong>
+  <%= @shel.row %>
+</p>
+
+<%= link_to 'Edit', edit_shel_path(@shel) %> |
+<%= link_to 'Back', shels_path %>

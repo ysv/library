@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Folder:</strong>
+  <%= @catalog.folder %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @catalog.type %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @catalog.name %>
+</p>
+
+<p>
+  <strong>Characteristic:</strong>
+  <%= @catalog.characteristic %>
+</p>
+
+<%= link_to 'Edit', edit_catalog_path(@catalog) %> |
+<%= link_to 'Back', catalogs_path %>

@@ -1,0 +1,2 @@
+class Shel < ApplicationRecord
+end
