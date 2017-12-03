@@ -124,6 +124,22 @@ class BooksController < ApplicationController
                     );
   ")
   end
+
+  def query6
+    @authors = Author.find_by_sql("
+    SELECT authors.*
+    FROM authors
+    INNER JOIN books_authors ON authors.id = books_authors.author_id
+    GROUP BY authors.id
+    HAVING COUNT(books_authors.book_id) <= (
+                                            SELECT COUNT(books.id)
+                                            FROM (( books
+                                            INNER JOIN library_rows ON books.id = library_rows.book_id)
+                                            INNER JOIN catalogs ON library_rows.catalog_id = catalogs.id)
+                                            WHERE catalogs.id = 1
+                                            );
+    ")
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_book
