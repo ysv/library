@@ -1,0 +1,32 @@
+<%= form_with(model: library_row, local: true) do |form| %>
+  <% if library_row.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(library_row.errors.count, "error") %> prohibited this library_row from being saved:</h2>
+
+      <ul>
+      <% library_row.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :book_id %>
+    <%= form.number_field :book_id, id: :library_row_book_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :catalog_id %>
+    <%= form.number_field :catalog_id, id: :library_row_catalog_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :shel_id %>
+    <%= form.number_field :shel_id, id: :library_row_shel_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

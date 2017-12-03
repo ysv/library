@@ -1,0 +1,2 @@
+class LibraryRow < ApplicationRecord
+end

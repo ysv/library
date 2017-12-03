@@ -66,6 +66,8 @@ class BooksController < ApplicationController
     @authors = Author.all
     @catalogs = Catalog.all
     @shels = Shel.all
+    @library_rows = LibraryRow.all
+    @books_authors = BooksAuthor.all
   end
 
   private

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171128230659) do
+ActiveRecord::Schema.define(version: 20171203150153) do
 
   create_table "authors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "name"
@@ -27,11 +27,26 @@ ActiveRecord::Schema.define(version: 20171128230659) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "books_authors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.integer "book_id"
+    t.integer "author_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "catalogs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "folder"
     t.string "type"
     t.string "name"
     t.string "characteristic"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "library_rows", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.integer "book_id"
+    t.integer "catalog_id"
+    t.integer "shel_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

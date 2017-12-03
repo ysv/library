@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Book:</strong>
+  <%= @library_row.book_id %>
+</p>
+
+<p>
+  <strong>Catalog:</strong>
+  <%= @library_row.catalog_id %>
+</p>
+
+<p>
+  <strong>Shel:</strong>
+  <%= @library_row.shel_id %>
+</p>
+
+<%= link_to 'Edit', edit_library_row_path(@library_row) %> |
+<%= link_to 'Back', library_rows_path %>

@@ -1,0 +1,2 @@
+class BooksAuthor < ApplicationRecord
+end

@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   root 'books#home'
+
+  resources :books_authors
+  resources :library_rows
   resources :books
   resources :authors
   resources :shels
