@@ -89,6 +89,18 @@ class BooksController < ApplicationController
     ")
   end
 
+  def query3
+    @books = Book.find_by_sql("
+    SELECT books.title, authors.name
+    FROM (((( books
+    INNER JOIN library_rows ON books.id = library_rows.book_id)
+    INNER JOIN shels ON library_rows.shel_id = shels.id)
+    INNER JOIN books_authors ON books.id = books_authors.book_id)
+    INNER JOIN authors ON books_authors.author_id = authors.id)
+    WHERE shels.row >= 2;
+    ")
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_book
