@@ -111,6 +111,19 @@ class BooksController < ApplicationController
     ")
   end
 
+  def query5
+    @catalogs = Catalog.find_by_sql("
+    SELECT catalogs.*
+    FROM (( catalogs
+    INNER JOIN library_rows ON catalogs.id = library_rows.catalog_id)
+    INNER JOIN books ON library_rows.book_id = books.id)
+    WHERE books.id IN(
+                        SELECT books.id
+                        FROM books
+                        WHERE books.date < '2017-01-01' OR books.date > '2017-12-31'
+                    );
+  ")
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_book
