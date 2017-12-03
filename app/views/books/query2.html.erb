@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Shels</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @shels.each do |shel| %>
+      <tr>
+        <td><%= shel.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Shel', new_shel_path %>
+<%= link_to 'Back', root_path %>

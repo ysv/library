@@ -11,6 +11,11 @@
     </div>
   <% end %>
 
+   <div class="field">
+    <%= form.label :id %>
+    <%= form.number_field :id, id: :id %>
+  </div>
+
   <div class="field">
     <%= form.label :book_id %>
     <%= form.number_field :book_id, id: :library_row_book_id %>

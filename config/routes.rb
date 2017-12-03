@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
   root 'books#home'
+  get 'query1', to: 'books#query1', as: 'query1'
+  get 'query2', to: 'books#query2', as: 'query2'
+  get 'query3', to: 'books#query3', as: 'query3'
+  get 'query4', to: 'books#query4', as: 'query4'
+  get 'query5', to: 'books#query5', as: 'query5'
+  get 'query6', to: 'books#query6', as: 'query6'
 
   resources :books_authors
   resources :library_rows

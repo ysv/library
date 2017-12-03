@@ -11,6 +11,11 @@
     </div>
   <% end %>
 
+ <div class="field">
+    <%= form.label :id %>
+    <%= form.number_field :id, id: :id %>
+  </div>
+
   <div class="field">
     <%= form.label :title %>
     <%= form.text_field :title, id: :book_title %>

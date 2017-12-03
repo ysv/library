@@ -70,6 +70,25 @@ class BooksController < ApplicationController
     @books_authors = BooksAuthor.all
   end
 
+  def query1
+    @catalogs = Catalog.find_by_sql("
+    SELECT *
+    FROM catalogs
+    INNER JOIN library_rows ON catalogs.id = library_rows.catalog_id
+    WHERE library_rows.book_id = 1;
+    ")
+  end
+
+  def query2
+    @shels = Shel.find_by_sql("
+    SELECT shels.name
+    FROM ((shels
+    INNER JOIN library_rows ON shels.id = library_rows.shel_id)
+    INNER JOIN catalogs ON library_rows.catalog_id = catalogs.id)
+    WHERE catalogs.name = 'History' AND catalogs.characteristic = 'top5'  ;
+    ")
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_book
