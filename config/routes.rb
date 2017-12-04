@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   get 'query4', to: 'books#query4', as: 'query4'
   get 'query5', to: 'books#query5', as: 'query5'
   get 'query6', to: 'books#query6', as: 'query6'
+  get 'query7', to: 'books#query7', as: 'query7'
+  get 'query8', to: 'books#query8', as: 'query8'
+
 
   resources :books_authors
   resources :library_rows

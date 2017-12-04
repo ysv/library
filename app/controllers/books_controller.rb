@@ -140,6 +140,29 @@ class BooksController < ApplicationController
                                             );
     ")
   end
+
+  def query7
+    @catalogs = Catalog.find_by_sql("
+    SELECT c1.*
+    FROM catalogs AS c1
+    WHERE EXISTS (
+        SELECT catalogs.id
+        FROM ((catalogs
+        INNER JOIN library_rows ON catalogs.id = library_rows.catalog_id)
+        INNER JOIN books ON library_rows.book_id = books.id)
+        WHERE catalogs.id = c1.id AND books.id NOT IN (
+            SELECT books.id
+            FROM ((catalogs
+            INNER JOIN library_rows ON catalogs.id = library_rows.catalog_id)
+            INNER JOIN books ON library_rows.book_id = books.id)
+            WHERE catalogs.id != c1.id));
+    ")
+  end
+
+  def query8
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_book
