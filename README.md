@@ -22,3 +22,10 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+## TODO
+
+- [ ] remove `coffe script etc`;
+- [ ] remove `redundant controllers`;
+- [ ] update `routes`;
+
