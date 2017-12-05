@@ -196,6 +196,26 @@ class BooksController < ApplicationController
     ") if !params[:catalog][:id].empty? && !params[:shel][:id].empty?
   end
 
+  def query9
+    @catalogs = []
+    catalog_id = params[:catalog][:id]
+    @catalogs = Catalog.find_by_sql("
+    SELECT c1.*
+    FROM catalogs AS c1
+    WHERE EXISTS (
+        SELECT catalogs.id
+        FROM ((catalogs
+        INNER JOIN library_rows ON catalogs.id = library_rows.catalog_id)
+        INNER JOIN books ON library_rows.book_id = books.id)
+        WHERE catalogs.id = #{catalog_id} AND books.id = ANY (
+            SELECT books.id
+            FROM ((catalogs
+            INNER JOIN library_rows ON catalogs.id = library_rows.catalog_id)
+            INNER JOIN books ON library_rows.book_id = books.id)
+            WHERE catalogs.id = c1.id))
+    ") if !params[:catalog][:id].empty?
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_book

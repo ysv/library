@@ -265,3 +265,11 @@
   </p>
   <%= submit_tag("Execute") %>
   <% end %>
+
+<%= form_tag("/query9", method: "get") do %>
+<h3>Запит №9</h3>
+   <p>
+    Каталоги в яких повторюються всі книги каталогу <%= number_field(:catalog, :id) %>
+  </p>
+  <%= submit_tag("Execute") %>
+  <% end %>
