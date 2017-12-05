@@ -174,7 +174,26 @@ class BooksController < ApplicationController
   end
 
   def query8
-
+    @books = []
+    catalog_id = params[:catalog][:id]
+    shel_id = params[:shel][:id]
+    @books = Book.find_by_sql("
+    SELECT authors.* , b1.*
+    FROM ((books AS b1
+    INNER JOIN books_authors ON b1.id = books_authors.book_id)
+    INNER JOIN authors ON books_authors.author_id = authors.id)
+    WHERE EXISTS (
+        SELECT books.id
+        FROM ((books
+        INNER JOIN library_rows ON books.id = library_rows.book_id)
+        INNER JOIN catalogs ON library_rows.catalog_id = catalogs.id)
+        WHERE catalogs.id = #{catalog_id} AND b1.id NOT IN (
+            SELECT books.id
+            FROM ((books
+            INNER JOIN library_rows ON books.id = library_rows.book_id)
+            INNER JOIN shels ON library_rows.shel_id = shels.id)
+            WHERE shels.id = #{shel_id}))
+    ") if !params[:catalog][:id].empty? && !params[:shel][:id].empty?
   end
 
   private

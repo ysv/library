@@ -256,3 +256,12 @@
   </p>
   <%= submit_tag("Execute") %>
   <% end %>
+
+
+<%= form_tag("/query8", method: "get") do %>
+<h3>Запит №8</h3>
+   <p>
+    Автори книг та книги що належать <%= number_field(:catalog, :id) %> каталогу  але не не стоять на <%= number_field(:shel, :id) %>  полиці
+  </p>
+  <%= submit_tag("Execute") %>
+  <% end %>
