@@ -24,6 +24,7 @@ class BooksController < ApplicationController
   # POST /books
   # POST /books.json
   def create
+
     @book = Book.new(book_params)
 
     respond_to do |format|
@@ -71,25 +72,31 @@ class BooksController < ApplicationController
   end
 
   def query1
+    @catalogs = []
+    book_id = params[:book][:id]
     @catalogs = Catalog.find_by_sql("
     SELECT *
     FROM catalogs
     INNER JOIN library_rows ON catalogs.id = library_rows.catalog_id
-    WHERE library_rows.book_id = 1;
-    ")
+    WHERE library_rows.book_id = #{book_id};
+    ") if !params[:book][:id].empty?
   end
 
   def query2
+    @shels = []
+    characteristic = params[:catalog][:characteristic]
     @shels = Shel.find_by_sql("
     SELECT shels.name
     FROM ((shels
     INNER JOIN library_rows ON shels.id = library_rows.shel_id)
     INNER JOIN catalogs ON library_rows.catalog_id = catalogs.id)
-    WHERE catalogs.name = 'History' AND catalogs.characteristic = 'top5'  ;
-    ")
+    WHERE catalogs.name = 'History' AND catalogs.characteristic = \"#{characteristic}\"  ;
+    ") if !params[:catalog][:characteristic].empty?
   end
 
   def query3
+    @books = []
+    row = params[:shel][:row]
     @books = Book.find_by_sql("
     SELECT books.title, authors.name
     FROM (((( books
@@ -97,35 +104,42 @@ class BooksController < ApplicationController
     INNER JOIN shels ON library_rows.shel_id = shels.id)
     INNER JOIN books_authors ON books.id = books_authors.book_id)
     INNER JOIN authors ON books_authors.author_id = authors.id)
-    WHERE shels.row >= 2;
-    ")
+    WHERE shels.row >= #{row};
+    ") if !params[:shel][:row].empty?
   end
 
   def query4
+    @books = []
+    author_name = params[:author][:name]
+    book_year = params[:book][:year]
     @books = Book.find_by_sql("
     SELECT books.*
     FROM ((books
     INNER JOIN books_authors ON books.id = books_authors.book_id)
     INNER JOIN authors ON books_authors.author_id = authors.id)
-    WHERE books.date <= '2017-01-01';
-    ")
+    WHERE books.date <= '#{book_year}' AND authors.name = '#{author_name}';
+    ") if !params[:author][:name].empty? && !params[:book][:year].empty?
   end
 
   def query5
+    @catalogs = []
+    book_year = params[:book][:year]
     @catalogs = Catalog.find_by_sql("
     SELECT catalogs.*
     FROM (( catalogs
     INNER JOIN library_rows ON catalogs.id = library_rows.catalog_id)
     INNER JOIN books ON library_rows.book_id = books.id)
-    WHERE books.id IN(
+    WHERE books.id NOT IN(
                         SELECT books.id
                         FROM books
-                        WHERE books.date < '2017-01-01' OR books.date > '2017-12-31'
+                        WHERE books.date >= '#{book_year}-01-01' AND books.date <= '#{book_year}-12-31'
                     );
-  ")
+  ") if !params[:book][:year].empty?
   end
 
   def query6
+    @authors = []
+    catalog_id = params[:catalog][:id]
     @authors = Author.find_by_sql("
     SELECT authors.*
     FROM authors
@@ -136,9 +150,9 @@ class BooksController < ApplicationController
                                             FROM (( books
                                             INNER JOIN library_rows ON books.id = library_rows.book_id)
                                             INNER JOIN catalogs ON library_rows.catalog_id = catalogs.id)
-                                            WHERE catalogs.id = 1
+                                            WHERE catalogs.id = #{catalog_id}
                                             );
-    ")
+    ") if !params[:catalog][:id].empty?
   end
 
   def query7

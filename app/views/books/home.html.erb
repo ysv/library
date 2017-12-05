@@ -198,61 +198,61 @@
 
 <%= link_to 'New Books Author', new_books_author_path %>
 
+
+<%= form_tag("/query1", method: "get") do %>
 <h3>Запит №1</h3>
-<div id="query1">
-  <p>
-    Знайти каталоги в яких є книга з id=1 .
+   <p>
+    Знайти каталоги в яких є книга з id
+    <%= number_field(:book, :id) %>
   </p>
-    <%= link_to 'Execute', query1_path %></td>
-  <br>
-</div>
+  <%= submit_tag("Execute") %>
+<% end %>
 
+<%= form_tag("/query2", method: "get") do %>
 <h3>Запит №2</h3>
-<div id="query1">
-  <p>
-    Знайти назви полиць на яких є каталог з історії з характеристикою 'top5' .
+   <p>
+    Знайти назви полиць на яких є каталог з історії з характеристикою
+    <%= text_field(:catalog, :characteristic) %>
   </p>
-    <%= link_to 'Execute', query2_path %></td>
-  <br>
-</div>
+  <%= submit_tag("Execute") %>
+<% end %>
 
+<%= form_tag("/query3", method: "get") do %>
 <h3>Запит №3</h3>
-<div id="query1">
-  <p>
-    Знайти імена авторів та назви книг які стоять на 2 або вище полиці  .
+   <p>
+    Знайти імена авторів та назви книг які стоять на <%= number_field(:shel, :row) %> або вище полиці
   </p>
-    <%= link_to 'Execute', query3_path %></td>
-  <br>
-</div>
+  <%= submit_tag("Execute") %>
+<% end %>
 
+<%= form_tag("/query4", method: "get") do %>
 <h3>Запит №4</h3>
-<div id="query1">
-  <p>
-    Знайти кількості сторінок книг автора 'John' випущені не пізніше 2017 року  </p>
-    <%= link_to 'Execute', query4_path %></td>
-  <br>
-</div>
+   <p>
+    Знайти кількості сторінок книг автора <%= text_field(:author, :name) %> випущені не пізніше <%= number_field(:book, :year) %>  року  </p>
+  </p>
+  <%= submit_tag("Execute") %>
+<% end %>
 
+<%= form_tag("/query5", method: "get") do %>
 <h3>Запит №5</h3>
-<div id="query1">
-  <p>
-    Знайти каталоги та полиці на яких немає книг випущених в 2017 році </p>
-    <%= link_to 'Execute', query5_path %></td>
-  <br>
-</div>
+   <p>
+    Знайти каталоги на яких немає книг випущених в <%= number_field(:book, :year) %> році </p>
+  </p>
+  <%= submit_tag("Execute") %>
+<% end %>
 
+<%= form_tag("/query6", method: "get") do %>
 <h3>Запит №6</h3>
-<div id="query1">
-  <p>
-    Знайти авторів що написали книг не більше ніж на першій полиці</p>
-    <%= link_to 'Execute', query6_path %></td>
-  <br>
-</div>
+   <p>
+    Знайти авторів що написали книг не більше ніж в <%= number_field(:catalog, :id) %> каталозі</p>
+  </p>
+  <%= submit_tag("Execute") %>
+  <% end %>
 
+<%= form_tag("/query7", method: "get") do %>
 <h3>Запит №7</h3>
-<div id="query1">
-  <p>
+   <p>
     Знайти каталоги лише з унікальними книгами (усі книги не повторюються в інших каталогах) </p>
-    <%= link_to 'Execute', query7_path %></td>
-  <br>
-</div>
+  </p>
+  <%= submit_tag("Execute") %>
+  <% end %>
